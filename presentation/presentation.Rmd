@@ -1,0 +1,405 @@
+---
+title: "Stephen Curry le meilleur tireur à trois points de l'histoire"
+subtitle: "Projet pour le cours d'introduction à la science des données"
+author: "Nicolas Franceschini / Quentin Wendling"
+institute: "UQAC"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r load-packages, include = FALSE}
+# Ajoutez tous les packages supplémentaires dont vous avez besoin à ce chunk
+library(tidyverse)
+library(tidymodels)
+library(palmerpenguins)
+library(knitr)
+library(xaringanthemer)
+library(readxl)
+library(dplyr)
+library(ggplot2)
+```
+
+```{r setup, include=FALSE}
+# Pour une meilleure résolution de figure
+knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%", warning = FALSE, message = FALSE)
+style_xaringan(
+  title_slide_background_image = "img/confetti.jpg"
+)
+```
+
+```{r load-data, include=FALSE}
+lead_fg3_pct <- read_csv("../data/fg3_pct.csv")
+lead_fg3_season <- read_csv("../data/fg3_season.csv")
+lead_fg3 <- read_csv("../data/fg3.csv")
+lead_fg3a_season <- read_csv("../data/fg3a_season.csv")
+NBA_avg <- read_excel("../data/NBA League Averages - Per Game.xlsx")
+NBA_totals <- read_excel("../data/NBA League Averages - Totals.xlsx")
+Curry_avg <- read_excel("../data/Stephen_Curry_Stats_Per_Game.xlsx")
+Curry_totals <- read_excel("../data/Stephen_Curry_Stats_Total.xlsx")
+Harden_avg <- read_csv("../data/James_Harden.csv")
+Miller_avg <- read_csv("../data/Reggie_Miller.csv")
+Korver_avg <- read_csv("../data/Kyle_Korver.csv")
+Allen_avg <- read_csv("../data/Ray_Allen.csv")
+
+Curry_seasons = c("2009-10", "2010-11", "2011-12", "2012-13", "2013-14", "2014-15", "2015-16", "2016-17", "2017-2018", "2018-19", "2019-20", "2020-21", "2021-22", "2022-23", "2023-24")
+
+NBA_avg_2009 <- NBA_avg %>%
+  filter(Season %in% Curry_seasons)
+```
+
+
+
+class: center, middle
+
+## Pourquoi Stephen Curry est-il considéré comme le meilleur tireur à trois points de tous les temps ?
+
+---
+
+class: center, inverse, middle
+
+# I. Qui est Stephen Curry ?
+
+---
+
+# Stephen Curry
+
+.pull-left[
+
+- 35 Ans
+
+- Meneur de jeu
+
+- 7ème Draft 2009 (14eme saison)
+
+- Golden State Warriors (San Francisco)
+
+- Champion NBA (x4)
+
+- MVP (x2)
+
+- Meilleur tireur à trois points ?
+]
+
+.pull-right[
+```{r Curry_face, echo = FALSE, fig.align='right'}
+include_graphics("img/Stephen_Curry.jpg")
+```
+]
+
+---
+
+class: inverse, center, middle
+
+# II. Le tir à trois points est-elle l'arme principale de Stephen Curry ?
+
+---
+
+class: center
+
+# Les statistiques de Stephen Curry
+
+.pull-left[
+```{r fig.align='center', echo=FALSE}
+Curry_avg %>%
+  ggplot(mapping = aes(x=Season, y=as.numeric(`3PA`) / as.numeric(FGA), fill = Season)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    labs(title = "Pourcentage des tirs tentés étant des tirs à trois points", subtitle = "selon la saison", x="Saison", y="Pourcentage") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    scale_fill_manual(values = c("Career" = "red")) +
+    coord_cartesian(ylim = c(0, 1))
+```
+]
+
+.pull-right[
+```{r fig.align='center', echo=FALSE}
+Curry_avg %>%
+  ggplot(mapping = aes(x=Season, y=as.numeric(`3P`) / as.numeric(FG), fill = Season)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    labs(title = "Pourcentage des tirs marqués étant des tirs à trois points", subtitle = "selon la saison", x="Saison", y="Pourcentage") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    scale_fill_manual(values = c("Career" = "red")) +
+    coord_cartesian(ylim = c(0, 1))
+```
+]
+
+---
+
+class: middle, center
+
+# Les statistiques de Stephen Curry
+
+.pull-left[
+```{r fig.align='center', echo=FALSE}
+Curry_avg %>%
+  ggplot(mapping = aes(x=Season, y=as.numeric(`3PA`) / as.numeric(FGA), fill = Season)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    labs(title = "Pourcentage des tirs tentés par Curry étant des tirs à trois points", subtitle = "selon la saison", x="Saison", y="Pourcentage") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    scale_fill_manual(values = c("Career" = "red")) +
+    coord_cartesian(ylim = c(0, 1))
+
+Curry_avg %>%
+  ggplot(mapping = aes(x=Season, y=as.numeric(`3P`) / as.numeric(FG), fill = Season)) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    labs(title = "Pourcentage des tirs marqués par Curry étant des tirs à trois points", subtitle = "selon la saison", x="Saison", y="Pourcentage") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) + 
+    scale_fill_manual(values = c("Career" = "red")) +
+    coord_cartesian(ylim = c(0, 1)) 
+```
+]
+
+.pull-right[
+```{r fig.align='center', echo=FALSE}
+NBA_avg_2009 %>%
+  ggplot(mapping = aes(x=Season, y=as.numeric(`3PA`) / as.numeric(FGA))) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    labs(title = "Pourcentage des tirs tentés en NBA étant des tirs à trois points", subtitle = "selon la saison", x="Saison", y="Pourcentage") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    coord_cartesian(ylim = c(0, 1))
+
+NBA_avg_2009 %>%
+  ggplot(mapping = aes(x=Season, y=as.numeric(`3P`) / as.numeric(FG))) +
+    geom_bar(stat = "identity", show.legend = FALSE) +
+    labs(title = "Pourcentage des tirs marqués en NBA étant des tirs à trois points", subtitle = "selon la saison", x="Saison", y="Pourcentage") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    coord_cartesian(ylim = c(0, 1))
+```
+]
+
+---
+
+class: inverse, middle, center
+
+# III. Pourquoi est-il le meilleur ?
+
+---
+
+class: center
+
+# 1. Leaders de trois points en carrière
+
+<!-- Graphique top 5 leaders 3 points en carriere -->
+```{r, echo=FALSE}
+top_5_lead_fg3 <- lead_fg3 %>%
+    top_n(5)
+```
+
+```{r, echo=FALSE}
+# réorganisation des joueurs afin d'obtenir un graphique avec les valeurs par ordre décroissant
+top_5_lead_fg3$Player <- reorder(top_5_lead_fg3$Player, -top_5_lead_fg3$`3P`)
+
+ggplot(top_5_lead_fg3, aes(x = Player, y = `3P`, fill = Player)) +
+    geom_bar(stat = "identity") +
+    scale_fill_manual(values = c("Stephen Curry" = "red"), name = "Joueur") +
+    labs(title = "Top 5 des joueurs ayant le plus de tire à trois points", y = "Nombre de tire à trois points", x = "Joueur") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.6))
+```
+
+---
+class: center
+
+# 1. Leaders de trois points en carrière
+
+<!-- Graphique 3 points en carriere en fonction du nombre saisons jouées pour le meme top 5-->
+
+```{r, echo=FALSE}
+player = c("Stephen Curry", "Ray Allen*", "James Harden", "Reggie Miller*", "Kyle Korver")
+nbSeasons = c(length(unique(Curry_avg$Season)), length(unique(Allen_avg$Season)), length(unique(Harden_avg$Season)),
+              length(unique(Miller_avg$Season)), length(unique(Korver_avg$Season)))
+
+top_5_lead_fg3_nbseason <- data.frame(Player = player, NbSeasons = nbSeasons)
+
+top_5_lead_fg3_nbseason <- inner_join(top_5_lead_fg3_nbseason, top_5_lead_fg3, by = "Player")
+```
+
+```{r, echo=FALSE}
+ggplot(top_5_lead_fg3_nbseason, mapping=(aes(x = nbSeasons, y = `3P`, color = Player))) +
+  geom_point() +
+  scale_color_manual(values = c("Stephen Curry" = "red")) +
+  labs(title="Nombre de trois points en carrière en fonction\ndu nombre de saisons jouées", x="Nombre de saisons", y="Nombre de trois points")
+```
+
+---
+
+class: center
+
+# 2. Meilleurs pourcentages à trois points en carrière
+
+<!-- Graphique top 11 leaders %3 points en carriere -->
+
+```{r, echo=FALSE}
+top_11_lead_fg3_pct <- lead_fg3_pct %>%
+    top_n(11)
+```
+
+```{r, echo=FALSE, out.width = "70%"}
+top_11_lead_fg3_pct$Player <- reorder(top_11_lead_fg3_pct$Player, -top_11_lead_fg3_pct$`3P%`)
+
+ggplot(top_11_lead_fg3_pct, aes(x = Player, y = `3P%`, fill = Player)) +
+    geom_bar(stat = "identity") +
+    scale_fill_manual(values = c("Stephen Curry" = "red"), name="Joueur") +
+    coord_cartesian(ylim = c(0.4, 0.475)) +
+    labs(title = "Top 11 des joueurs ayant le meilleur pourcentage de réussite de tire à trois points", y = "Pourcentage de réussite de tire à trois points", x = "Joueur") +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.6))
+```
+
+---
+
+class: center
+
+# 3. Méler quantité et efficacité
+
+<!-- Graphique nombre de trois points en carriere en fonction du % à trois point en carriere -->
+
+```{r, echo=FALSE}
+lead_fg3_fg3_pct <- inner_join(lead_fg3_pct, lead_fg3, by = "Player") %>%
+    select(-Rank.x, -Rank.y) # on enlève les colonnes inutiles (le rank dans chacune des 2 bases)
+```
+
+```{r, echo=FALSE}
+ggplot(lead_fg3_fg3_pct, aes(x = `3P`, y = `3P%`)) +
+    geom_point(aes(color = ifelse(Player == "Stephen Curry", "Stephen Curry", "Autres joueurs"))) +
+    scale_color_manual(values = c("Stephen Curry" = "red", "Autres joueurs" = "blue"), name = "Joueur") +
+    labs(title = "L'excellence de Stephen Curry", subtitle = "Comparaison des Pourcentages et du Nombre de Tirs à Trois Points", y = "Pourcentage de réussite de tire à trois points", x = "Nombre de tire à trois points")
+```
+
+---
+
+class: center
+
+# 4. Record de trois points en une saison
+
+<!-- Graphique top 10 des saisons d'un joueur avec le plus de trois points, saisons de Curry en rouge -->
+
+```{r, echo=FALSE}
+lead_fg3_season_10 <- lead_fg3_season %>%
+  mutate(PlayerSeason = paste(Player, Season)) %>%
+  head(10)
+
+```
+
+```{r, echo=FALSE}
+ggplot(lead_fg3_season_10, mapping=(aes(x=reorder(PlayerSeason, -`3P`),y=`3P`, fill = Player))) +
+  geom_bar(stat="identity") +
+  labs(title = "Top 10 des saisons individuelles avec le plus de trois points réussis", x="Joueur + Saison", y="Nombre de trois points inscrits") +
+  scale_fill_manual(values = c("Stephen Curry" = "red")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+```
+
+---
+
+class: inverse, middle, center
+
+# IV. Stephen Curry a-t-il changé la façon de jouer au basket en NBA ?
+
+---
+
+class: center
+
+# 1. L'augmentation du nombre de tir à trois points
+
+<!-- Graphique représentant l'évolution du nombre de trois points tenté moyen par matchs par saison en nba avec l'année de la draft de stephen curry en rouge ainsi que ses deux saisons mvp en bleu -->
+
+```{r, echo=FALSE}
+NBA_avg <- NBA_avg %>%
+  mutate(`3PA` = as.numeric(`3PA`))
+```
+
+```{r, echo=FALSE}
+NBA_avg_filtre <- NBA_avg %>%
+    filter(!is.na(`3PA`))
+```
+
+```{r, echo=FALSE, out.width="68%", fig.width=10}
+ggplot(NBA_avg_filtre, mapping=aes(x=Season, y=`3PA`, fill = Season)) +
+  geom_bar(stat="identity") +
+  scale_fill_manual(values = c("2009-10" = "red", "2015-16" = "blue", "2014-15" = "blue")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  labs(title="Evolution du nombre de trois points moyen par match par saison", subtitle="en NBA", x="Saison", y="Nombre de trois points moyen par match")
+```
+
+---
+
+class: center
+
+# 1. L'augmentation du nombre de tir à trois points
+
+<!-- Graphique représentant l'évolution du nombre de trois points tenté moyen par matchs en fonction du nombre de tirs tentés par match par saison en nba avec l'année de la draft de stephen curry en rouge ainsi que ses deux saisons mvp en bleu -->
+
+<!-- Pour prouver que l'augmentation du graphique précédent n'est pas seulement du à l'augmentation de la rapidité du jeu en nba -->
+
+```{r, echo=FALSE}
+draft_year <- Curry_avg %>%
+    filter(Season == min(Season)) %>%
+    pull(Season)
+```
+
+```{r, echo=FALSE}
+mvp_years <- c("2014-15","2015-16")
+```
+
+```{r, echo=FALSE}
+NBA_avg <- NBA_avg %>%
+  mutate(FGA = as.numeric(FGA), `3PA` = as.numeric(`3PA`)) %>%
+  filter(!is.na(FGA) & !is.na(`3PA`))
+```
+
+
+```{r, echo=FALSE}
+NBA_avg <- NBA_avg %>%
+    mutate(Highlight = case_when(
+        Season == draft_year ~ "Draft",
+        Season %in% mvp_years ~ "MVP",
+        TRUE ~ "Regular"
+    ))
+```
+
+```{r echo=FALSE, fig.width=10, out.width="68%"}
+ggplot(NBA_avg, aes(x = Season, y = `3PA` / FGA, fill = Highlight)) +
+    geom_bar(stat = "identity", position = "dodge") +
+    scale_fill_manual(values = c("Regular" = "darkgrey", "Draft" = "red", "MVP" = "blue")) +
+    labs(title = "Évolution du Nombre de Trois Points Tentés\npar Match en NBA par Saison", x = "Saison", y = "Nombre Moyen de Trois Points Tentés\npar Match en Pourcentage", fill = "Légende") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+---
+
+class: center
+
+# 2. L'évolution de l'adresse à trois points
+
+<!-- Graphique représentant l'évolution du % à 3P moyen par saison en nba -->
+
+```{r, echo=FALSE}
+NBA_avg <- NBA_avg %>%
+  mutate(`3P%` = as.numeric(`3P%`))
+```
+
+```{r, echo=FALSE}
+NBA_avg_filtre <- NBA_avg %>%
+    filter(!is.na(`3P%`))
+```
+
+```{r echo=FALSE, fig.width=10, out.width="68%"}
+ggplot(NBA_avg_filtre, aes(x = Season, y = `3P%`, group = 1)) +
+    geom_line(stat = "identity", color="lightblue", linewidth=2) +
+    geom_ribbon(aes(ymin = 0, ymax = `3P%`), fill = "darkblue", alpha = 0.4) +
+    labs(title = "Évolution du pourcentage à trois points moyen par saison en NBA", y = "Pourcentage à trois points moyen", x = "Saison") +
+    coord_cartesian(ylim = c(0, 0.4)) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+
+---
+
+class: inverse, center, middle
+
+## Conclusion

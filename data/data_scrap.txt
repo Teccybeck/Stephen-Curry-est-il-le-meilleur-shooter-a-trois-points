@@ -1,0 +1,37 @@
+library(rvest)
+library(dplyr)
+
+
+page <- read_html("https://www.basketball-reference.com/leaders/fg3_pct_career.html#nba")
+
+data <- page %>%
+    html_table(fill = TRUE)
+
+fg3_pct_data <- data[1]
+
+
+
+page <- read_html("https://www.basketball-reference.com/leaders/fg3_career.html#tot")
+
+data <- page %>%
+    html_table(fill = TRUE)
+
+fg3_data <- data[1]
+
+
+
+page <- read_html("https://www.basketball-reference.com/leaders/fg3_season.html")
+
+data <- page %>%
+    html_table(fill = TRUE)
+
+fg3_season_data <- data[1]
+
+
+
+page <- read_html("https://www.basketball-reference.com/leaders/fg3a_season.html")
+
+data <- page %>%
+    html_table(fill = TRUE)
+
+fg3a_season_data <- data[1]

@@ -1,0 +1,176 @@
+---
+title: Stephen Curry le meilleur tireur à trois points de l'histoire
+author: Nicolas Franceschini / Quentin Wendling
+output: github_document
+---
+
+## Résumé
+
+Dans l'histoire du basketball et plus précisément de la NBA, les débats infinis ou encore les questions sans réponses sont monnaie courante, cela fait même partie du jeu. Lorsque l'on parle de ces questions sans réponse on pense par exemple à l'infini débat entre Michael Jordan et LeBron James, pour la meilleure équipe de tous les temps les Bulls de 1995-1996 ou les Warriors de 2015-2016 ou encore pour qui est le meilleur tireur à 3 points de tous les temps entre Stephen Curry et ... Et bien non enfaite, s'il y a bien une question où la réponse est unanime, c'est celle-ci.
+
+Stephen Curry est un joueur de NBA de 35 ans évoluant au poste de meneur de jeu au sein de l'équipe des Golden State Warriors depuis maintenant 14 saisons (depuis la saison 2009-2010). Depuis toujours, son arme principale pour marquer des points a été le tir à trois points plus que personne ne l’avais fait avant lui. Depuis quelques années déjà, il est considéré par la très grande majorité voir l’entièreté de la communauté basket comme le meilleur tireur à trois points de tous les temps et depuis qu’il a obtenu ce titre, il a encore réalisé des exploits qui renforcent sa légitimité.
+
+Avant lui, la NBA avait déjà vu des grand noms obtenir ce titre, on pense notamment à Ray Allen ou encore Regie Miller mais aucun n’a atteint les records de Curry. Même aujourd’hui, certains joueurs pourrait prétendre au poste si Curry n’existait pas, on peut par exemple citer le coéquipier de Curry Klay Thompson (avec qui ils forment le duo des « splash bros ») ou encore James Harden, le rival de Curry dans la conférence Ouest du milieu à la fin des années 2010. 
+
+Afin de bien comprendre l’analyse que nous allons réaliser, il est aussi important de savoir ce qu’est un tir à trois points. Selon Wikipédia : « le panier à trois points est un tir réussi à longue distance, derrière une ligne placée selon les règles internationales de la FIBA actuellement à 6,75 m, à 7,23 m selon les règles de la NBA et est passé à 6,75 m en NCAA. », c’est aussi simple que ça. Il est aussi important de savoir qu’au basket les paniers marqués plus proche que la ligne à trois points valent deux points et qu’il est aussi possible de tirer des lancers francs qui valent un points, si une faute a été réaliser sur un joueur entrain de tirer. Ces explications nous permettent de comprendre tout l’intérêt du tir à trois points, un tir plus compliqué car réaliser de plus loin mais qui offre une plus grande récompense, un point supplémentaire.
+
+Stephen Curry a bien compris l’intérêt du tir à trois points et a donc décider de le maitriser à la perfection pour en faire une des armes voir l’arme la plus puissante qu’un joueur de NBA n’est jamais posséder. En effet, grâce à ses tirs à trois points (et pas que), Stephen Curry a su se démarquer comme étant un des meilleurs joueurs de sa génération et fait partie pour beaucoup du top 10 des meilleurs joueurs de l’histoire de la NBA. De plus, Stephen Curry ne possède pas seulement le titre symbolique de meilleur tireur à trois points de l’histoire, il possède également des titre bien réels comme 4 titres de champions NBA ou encore 2 trophées de MVP (Most Valuable Player) de la saison régulière.
+
+D’autres arguments qui consolident son statut de meilleur tireur à trois points sont par exemple le fait qu’il possède le record de tir à trois points marquer en une seule saison (il possède d’ailleurs 4 des 5 meilleurs saisons) ou encore le fait que le 14 Décembre 2021, Stephen Curry dépasse Ray Allen et deviens de le tireur à trois points le plus prolifique de la NBA avec aujourd’hui (le 10 Novembre 2023) 3443 tir à trois points marquer en carrière.
+
+Nous pourrions encore continuer pendant longtemps mais ces informations la résument déjà bien les exploits du joueurs. Pour en savoir plus et connaitre toutes les choses qui font de Stephen Curry le meilleur tireur à trois points de tous les temps, vous pouvez regarder notre analyse qui suit.
+
+
+
+```{r load-data, echo = FALSE}
+# load data here, if you like
+```
+
+# Présentation
+
+Notre présentation est disponible [ici](presentation/presentation.html).
+
+## Données
+
+### NBA League Averages - Per Game
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : NBA Career Leaders and Records for 3-Pt Field Goal Pct
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/leagues/NBA_stats_per_game.html
+
+
+### NBA League Averages – Totals
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : NBA Career Leaders and Records for 3-Pt Field Goals
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/leagues/NBA_stats_totals.html
+
+
+### Stephen_Curry_Stats_Total
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : Stephen Curry career total
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/players/c/curryst01.html
+
+
+### Stephen_Curry_Stats_Per_Game
+
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : Stephen Curry career total
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/players/c/curryst01.html
+
+
+### fg3_pct_data
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : NBA Career Leaders and Records for 3-Pt Field Goal Pct
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/leaders/fg3_pct_career.html#nba
+
+
+### fg3_data
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : NBA Career Leaders and Records for 3-Pt Field Goals
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/leaders/fg3_career.html
+
+
+### fg3_season_data
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : NBA Single Season Leaders and Records for 3-Pt Field Goals
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/leaders/fg3_season.html
+
+
+### fg3a_season_data
+
+Auteur : Basketball-Reference.com
+
+Année : 10/11/2013
+
+Titre : NBA Single Season Leaders and Records for 3-Pt Field Goal Attempts
+
+Description: Ensemble de données électroniques
+
+Éditeur: Basketball-Reference.com
+
+URL: https://www.basketball-reference.com/leaders/fg3a_season.html
+
+
+## Plan d'analyse des données
+
+Notre analyse ne comprend pas de variables de résultat mais uniquement de variables prédictives. En effet, le titre de meilleur tireur à trois points est abstrait et ne peut pas être définit précisément selon des statistiques. Ici, ce sont juste l'ensemble de différentes observation qui nous emmènent à penser que Stephen Curry mérite ce titre, mais concrètement il n'y a pas une seule variable ou statistique qui peut nous donner la réponse.
+
+Pour ce qui est des variables de prédictions, nous allons utiliser toutes les statistiques liées aux 3 points (pourcentage de tirs à 3 points rentrés, nombre de tirs tentés, total de tir réalisés sur une saison, etc) ainsi que certaines autres statistique pour montrer que le tir à trois points est vraiment ancrée dans le jeu du joueur.
+
+Ces variables seront donc utilisées pour comprendre l'importance du tir à trois points dans le jeu de Stephen Curry mais aussi pour le comparer aux autres joueurs (ce qui est logique si on veut prouver qu'il mérite son titre).
+Il serait trop long de le comparer à tous les joueurs NBA ayant existé (et surtout les données seraient énormes) donc nous allons surtout le comparer aux autres joueurs pouvant prétendre au titre si Curry n'existait pas. Nous pouvons les connaitres car ils sont présents dans les base de données concernant les meilleurs pourcentages aux tir à trois points ou encore les joueurs avec le plus de tir à trois points réalisés en carrière.
+
+La comparaison avec les autres joueurs est selon nous la meilleure façon de prouver la légitmité su titre accordé à Stphen Curry, cependant il ne fait pas seulement comparer sur les statistiques en jeu. En effet, un bon joueur fait aussi gagner son équipe et se distingue par desrécompenses personnelles. Cet aspect de la carrière de Stephen Curry ne peut pas être mis à l'écart.
+
+Grâce à toutes ces comparaisons, nous verrons que Stephen Curry se démarque dans toutes les catégories, sans forcément être le meilleur à chaque fois, mais il est excellent dans tous les domaines, contrairement aux autres qui ne sont pas tout le temps dans les meilleurs.
+
+## Références
+
+Pour ce qui est des données utilisées, nous avons utilisé le site basketball reference (<https://www.basketball-reference.com/>) qui regroupent toutes les données en rapport avec la NBA.
+
+Pour ce qui est de l'histoire de Stephen Curry et de tous ses accomplissements, ce sont des connaissance que nous possédions déjà étant fans de basketball et plus particulièrement de la NBA.
+
+Cependant, si vous voulez en savoir plus voici la page Wikipédia du joueur : <https://en.wikipedia.org/wiki/Stephen_Curry>.
+
